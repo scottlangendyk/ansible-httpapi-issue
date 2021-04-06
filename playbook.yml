@@ -1,0 +1,41 @@
+---
+- gather_facts: false
+  hosts: localhost
+  tasks:
+    - command:
+        cmd: "docker-compose up -d"
+
+    - add_host:
+        name: web1
+        ansible_connection: httpapi
+        ansible_host: 127.0.0.1
+        ansible_network_os: testing
+        ansible_httpapi_port: 8001
+
+    - add_host:
+        name: web2
+        ansible_connection: httpapi
+        ansible_host: 127.0.0.1
+        ansible_network_os: testing
+        ansible_httpapi_port: 8002
+
+    - add_host:
+        name: web3
+        ansible_connection: httpapi
+        ansible_host: 127.0.0.1
+        ansible_network_os: testing
+        ansible_httpapi_port: 8003
+
+- gather_facts: false
+  hosts: all
+  collections:
+    - mynamespace.mycollection
+  tasks:
+    - debug:
+        msg: "{{ ansible_httpapi_port }}"
+
+    - my_module:
+      register: output_value
+    
+    - debug:
+        msg: "{{ output_value }}"

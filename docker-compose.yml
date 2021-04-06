@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+    web1:
+        image: "brndnmtthws/nginx-echo-headers"
+        ports:
+            - "8001:8080"
+    web2:
+        image: "brndnmtthws/nginx-echo-headers"
+        ports:
+            - "8002:8080"
+    web3:
+        image: "brndnmtthws/nginx-echo-headers"
+        ports:
+            - "8003:8080"
